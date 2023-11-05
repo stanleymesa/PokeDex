@@ -1,4 +1,4 @@
-package com.stanleymesa.pokedex
+package com.stanleymesa.pokedex.features
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.stanleymesa.pokedex.ui.theme.PokeDexTheme
-import dagger.hilt.android.AndroidEntryPoint
 
 //@AndroidEntryPoint
 class MainActivity : ComponentActivity() {

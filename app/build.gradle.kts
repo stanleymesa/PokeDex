@@ -23,9 +23,16 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", AndroidConfig.baseURLStaging)
+        }
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", AndroidConfig.baseURLStaging)
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -65,6 +72,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-alpha03")
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
+    implementation(ArchitectureComponent.dataStore)
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
