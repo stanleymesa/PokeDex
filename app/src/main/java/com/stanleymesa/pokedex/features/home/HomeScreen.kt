@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.stanleymesa.pokedex.R
 import com.stanleymesa.pokedex.features.home.component.DefaultEditText
+import com.stanleymesa.pokedex.features.home.component.PokemonCard
 
 @Composable
 fun HomeScreen(
@@ -64,6 +65,8 @@ fun HomeScreen(
                     value = state.searchText,
                     hint = stringResource(id = R.string.search_pokemon)
                 )
+                Spacer(modifier = Modifier.height(24.dp))
+                PokemonCard()
             }
         }
     }

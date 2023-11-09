@@ -1,7 +1,5 @@
 package com.stanleymesa.pokedex.features.home.component
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,33 +24,30 @@ fun DefaultEditText(
     value: String = "",
     hint: String = "Search..."
 ) {
-    Box(modifier = modifier) {
-        TextField(
-            value = value,
-            onValueChange = { onValueChange.invoke(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp)
-                .shadow(
-                    elevation = 8.dp,
-                    shape = RoundedCornerShape(16.dp)
-                ),
-            shape = RoundedCornerShape(16.dp),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.White,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                textColor = Color.Black
+    TextField(
+        value = value,
+        onValueChange = { onValueChange.invoke(it) },
+        modifier = modifier
+            .height(48.dp)
+            .shadow(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(16.dp)
             ),
-            textStyle = MaterialTheme.typography.bodyMedium,
-            maxLines = 1,
-            placeholder = {
-                Text(
-                    text = hint,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = LightGrey
-                )
-            },
-        )
-    }
+        shape = RoundedCornerShape(16.dp),
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color.White,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            textColor = Color.Black
+        ),
+        textStyle = MaterialTheme.typography.bodyMedium,
+        maxLines = 1,
+        placeholder = {
+            Text(
+                text = hint,
+                style = MaterialTheme.typography.bodyMedium,
+                color = LightGrey
+            )
+        },
+    )
 }

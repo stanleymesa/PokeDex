@@ -1,6 +1,5 @@
 package com.stanleymesa.pokedex.features.home
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -10,9 +9,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
 
-    private val _state: MutableState<HomeState> by lazy {
-        mutableStateOf(HomeState())
-    }
+    private var _state = mutableStateOf(HomeState())
+
     val state: State<HomeState> = _state
 
     fun onEvent(homeEvent: HomeEvent) {

@@ -7,13 +7,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.stanleymesa.pokedex.features.home.HomeScreen
-import com.stanleymesa.pokedex.features.home.component.PokemonCard
 import com.stanleymesa.pokedex.ui.theme.PokeDexTheme
 import com.stanleymesa.pokedex.utils.screen.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
