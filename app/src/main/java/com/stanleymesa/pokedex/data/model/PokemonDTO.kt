@@ -14,7 +14,7 @@ data class PokemonDTO(
 	val baseExperience: Int? = null,
 
 	@field:SerializedName("held_items")
-	val heldItems: List<Any?>? = null,
+	val heldItems: List<String?>? = null,
 
 	@field:SerializedName("weight")
 	val weight: Int? = null,
@@ -23,13 +23,13 @@ data class PokemonDTO(
 	val isDefault: Boolean? = null,
 
 	@field:SerializedName("past_types")
-	val pastTypes: List<Any?>? = null,
+	val pastTypes: List<String?>? = null,
 
 	@field:SerializedName("sprites")
 	val sprites: Sprites? = null,
 
 	@field:SerializedName("past_abilities")
-	val pastAbilities: List<Any?>? = null,
+	val pastAbilities: List<String?>? = null,
 
 	@field:SerializedName("abilities")
 	val abilities: List<AbilitiesItem?>? = null,
@@ -104,22 +104,22 @@ data class RubySapphire(
 data class Animated(
 
 	@field:SerializedName("back_shiny_female")
-	val backShinyFemale: Any? = null,
+	val backShinyFemale: String? = null,
 
 	@field:SerializedName("back_female")
-	val backFemale: Any? = null,
+	val backFemale: String? = null,
 
 	@field:SerializedName("back_default")
 	val backDefault: String? = null,
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("back_shiny")
 	val backShiny: String? = null,
@@ -179,13 +179,13 @@ data class GenerationIii(
 data class Home(
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("front_shiny")
 	val frontShiny: String? = null
@@ -206,10 +206,10 @@ data class GenerationIv(
 data class Sprites(
 
 	@field:SerializedName("back_shiny_female")
-	val backShinyFemale: Any? = null,
+	val backShinyFemale: String? = null,
 
 	@field:SerializedName("back_female")
-	val backFemale: Any? = null,
+	val backFemale: String? = null,
 
 	@field:SerializedName("other")
 	val other: Other? = null,
@@ -218,7 +218,7 @@ data class Sprites(
 	val backDefault: String? = null,
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
@@ -227,7 +227,7 @@ data class Sprites(
 	val versions: Versions? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("back_shiny")
 	val backShiny: String? = null,
@@ -239,22 +239,22 @@ data class Sprites(
 data class Platinum(
 
 	@field:SerializedName("back_shiny_female")
-	val backShinyFemale: Any? = null,
+	val backShinyFemale: String? = null,
 
 	@field:SerializedName("back_female")
-	val backFemale: Any? = null,
+	val backFemale: String? = null,
 
 	@field:SerializedName("back_default")
 	val backDefault: String? = null,
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("back_shiny")
 	val backShiny: String? = null,
@@ -305,7 +305,7 @@ data class Icons(
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null
+	val frontFemale: String? = null
 )
 
 data class GenerationViii(
@@ -371,13 +371,13 @@ data class Other(
 data class UltraSunUltraMoon(
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("front_shiny")
 	val frontShiny: String? = null
@@ -386,13 +386,13 @@ data class UltraSunUltraMoon(
 data class OmegarubyAlphasapphire(
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("front_shiny")
 	val frontShiny: String? = null
@@ -449,7 +449,7 @@ data class DreamWorld(
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null
+	val frontFemale: String? = null
 )
 
 data class Version(
@@ -503,16 +503,16 @@ data class Silver(
 data class BlackWhite(
 
 	@field:SerializedName("back_shiny_female")
-	val backShinyFemale: Any? = null,
+	val backShinyFemale: String? = null,
 
 	@field:SerializedName("back_female")
-	val backFemale: Any? = null,
+	val backFemale: String? = null,
 
 	@field:SerializedName("back_default")
 	val backDefault: String? = null,
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
@@ -521,7 +521,7 @@ data class BlackWhite(
 	val animated: Animated? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("back_shiny")
 	val backShiny: String? = null,
@@ -533,22 +533,22 @@ data class BlackWhite(
 data class HeartgoldSoulsilver(
 
 	@field:SerializedName("back_shiny_female")
-	val backShinyFemale: Any? = null,
+	val backShinyFemale: String? = null,
 
 	@field:SerializedName("back_female")
-	val backFemale: Any? = null,
+	val backFemale: String? = null,
 
 	@field:SerializedName("back_default")
 	val backDefault: String? = null,
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("back_shiny")
 	val backShiny: String? = null,
@@ -608,13 +608,13 @@ data class Ability(
 data class XY(
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("front_shiny")
 	val frontShiny: String? = null
@@ -641,22 +641,22 @@ data class MovesItem(
 data class DiamondPearl(
 
 	@field:SerializedName("back_shiny_female")
-	val backShinyFemale: Any? = null,
+	val backShinyFemale: String? = null,
 
 	@field:SerializedName("back_female")
-	val backFemale: Any? = null,
+	val backFemale: String? = null,
 
 	@field:SerializedName("back_default")
 	val backDefault: String? = null,
 
 	@field:SerializedName("front_shiny_female")
-	val frontShinyFemale: Any? = null,
+	val frontShinyFemale: String? = null,
 
 	@field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
 	@field:SerializedName("front_female")
-	val frontFemale: Any? = null,
+	val frontFemale: String? = null,
 
 	@field:SerializedName("back_shiny")
 	val backShiny: String? = null,

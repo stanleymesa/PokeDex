@@ -8,7 +8,7 @@ data class PokemonListDTO(
 	val next: String? = null,
 
 	@field:SerializedName("previous")
-	val previous: Any? = null,
+	val previous: String? = null,
 
 	@field:SerializedName("count")
 	val count: Int? = null,
