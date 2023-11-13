@@ -1,1 +1,1 @@
-C:\github\PokeDex\buildSrc\build\classes\kotlin\main\AndroidConfig.class
+C:\stanley\github\PokeDex\buildSrc\build\classes\kotlin\main\AndroidConfig.class

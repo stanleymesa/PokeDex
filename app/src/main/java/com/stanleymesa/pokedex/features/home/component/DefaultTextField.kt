@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stanleymesa.pokedex.ui.theme.LightGrey
+import com.stanleymesa.pokedex.utils.loge
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -24,6 +25,7 @@ fun DefaultEditText(
     value: String = "",
     hint: String = "Search..."
 ) {
+    loge("render search bar")
     TextField(
         value = value,
         onValueChange = { onValueChange.invoke(it) },

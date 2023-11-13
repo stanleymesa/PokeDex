@@ -1,14 +1,24 @@
 package com.stanleymesa.pokedex.features.home
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.palette.graphics.Palette
 import com.stanleymesa.pokedex.domain.usecase.PokemonUseCases
 import com.stanleymesa.pokedex.utils.coroutines.CoroutineContextProvider
 import com.stanleymesa.pokedex.utils.loge
 import com.stanleymesa.pokedex.utils.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,18 +28,17 @@ class HomeViewModel @Inject constructor(
     private val contextProvider: CoroutineContextProvider
 ) : ViewModel() {
 
-    private var _state = mutableStateOf(HomeState())
-
-    val state: State<HomeState> = _state
+    private var _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
+    val state: StateFlow<HomeState> = _state.asStateFlow()
 
     init {
-        getPokemonInfo("charmander")
+//        getPokemonInfo("charmander")
     }
 
     fun onEvent(homeEvent: HomeEvent) {
         when (homeEvent) {
             is HomeEvent.SearchText -> {
-                _state.value = state.value.copy(searchText = homeEvent.text)
+                _state.update { state.value.copy(searchText = homeEvent.text) }
             }
         }
     }
@@ -46,6 +55,17 @@ class HomeViewModel @Inject constructor(
                 else -> {
                     loge(resource.message.toString())
                 }
+            }
+        }
+    }
+
+    fun calcDominantColor(drawable: Drawable, onFinish: (Color) -> Unit) {
+
+        val bitmap = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
+
+        Palette.from(bitmap).generate { palette ->
+            palette?.dominantSwatch?.rgb?.let { colorValue ->
+                onFinish(Color(colorValue))
             }
         }
     }

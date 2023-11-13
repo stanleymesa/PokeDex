@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
@@ -21,19 +20,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.stanleymesa.pokedex.R
 import com.stanleymesa.pokedex.features.home.component.DefaultEditText
 import com.stanleymesa.pokedex.features.home.component.PokemonCard
+import com.stanleymesa.pokedex.ui.theme.PokeDexTheme
+import com.stanleymesa.pokedex.utils.asState
+import com.stanleymesa.pokedex.utils.loge
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun HomeScreen(
-    navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel(),
+    stateFlow: () -> StateFlow<HomeState>,
+    onEvent: (HomeEvent) -> Unit
 ) {
-    val state = viewModel.state.value
+    loge("render home screen")
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -59,9 +62,9 @@ fun HomeScreen(
                 DefaultEditText(
                     modifier = Modifier.fillMaxWidth(),
                     onValueChange = {
-                        viewModel.onEvent(HomeEvent.SearchText(it))
+                        onEvent(HomeEvent.SearchText(it))
                     },
-                    value = state.searchText,
+                    value = stateFlow().asState().searchText,
                     hint = stringResource(id = R.string.search_pokemon)
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -72,6 +75,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(bottom = 24.dp)
                 ) {
+                    loge("render grid")
                     items(
                         count = 10,
                     ) {
@@ -83,25 +87,14 @@ fun HomeScreen(
     }
 }
 
-//fun getConstraintSet() =
-//    ConstraintSet {
-//        val gridPokemon = createRefFor("grid_pokemon")
-//        val dummyBox = createRefFor("dummy_box")
-//
-//        constrain(gridPokemon) {
-//            top.linkTo(parent.top)
-//            bottom.linkTo(dummyBox.top)
-//            start.linkTo(parent.start)
-//            end.linkTo(parent.end)
-//            height = Dimension.fillToConstraints
-//            width = Dimension.fillToConstraints
-//        }
-//        constrain(dummyBox) {
-//            bottom.linkTo(parent.bottom)
-//            height = Dimension.value(100.dp)
-//            start.linkTo(parent.start)
-//            end.linkTo(parent.end)
-//            width = Dimension.fillToConstraints
-//        }
-//    }
+@Preview
+@Composable
+fun HomeScreenPreview() {
+    PokeDexTheme(darkTheme = false, dynamicColor = false) {
+        HomeScreen(
+            stateFlow = { MutableStateFlow(HomeState()) },
+            onEvent = {}
+        )
+    }
+}
 

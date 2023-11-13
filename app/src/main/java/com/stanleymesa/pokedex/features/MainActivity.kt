@@ -3,10 +3,12 @@ package com.stanleymesa.pokedex.features
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.stanleymesa.pokedex.features.home.HomeScreen
+import com.stanleymesa.pokedex.features.home.HomeViewModel
 import com.stanleymesa.pokedex.ui.theme.PokeDexTheme
 import com.stanleymesa.pokedex.utils.screen.Screen
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +28,11 @@ class MainActivity : ComponentActivity() {
                     composable(
                         route = Screen.Home.route
                     ) {
-                        HomeScreen(navController = navController)
+                        val viewModel: HomeViewModel = hiltViewModel()
+                        HomeScreen(
+                            stateFlow = { viewModel.state },
+                            onEvent = viewModel::onEvent
+                        )
                     }
 //                        composable(
 //                            route = "${Screen.Detail.route}/{dominantColor}/{pokemonName}",

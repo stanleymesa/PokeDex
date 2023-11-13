@@ -25,13 +25,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stanleymesa.pokedex.R
+import com.stanleymesa.pokedex.utils.loge
 
 
 @Preview(showBackground = true)
 @Composable
 fun PokemonCard(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
+    loge("render pokemon card")
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.Yellow),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
@@ -60,6 +62,7 @@ fun PokemonCard(
             Text(
                 text = "Pikachu",
                 style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.align(CenterHorizontally)
             )
         }
