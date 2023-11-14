@@ -30,8 +30,11 @@ class MainActivity : ComponentActivity() {
                     ) {
                         val viewModel: HomeViewModel = hiltViewModel()
                         HomeScreen(
-                            stateFlow = { viewModel.state },
-                            onEvent = viewModel::onEvent
+                            navController = navController,
+//                            state = { viewModel.state.value }  ,
+                            onEvent = viewModel::onEvent,
+                            stateSearch = viewModel.stateSearch,
+                            stateTest = viewModel.stateTest,
                         )
                     }
 //                        composable(

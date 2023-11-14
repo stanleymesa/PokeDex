@@ -32,6 +32,7 @@ import com.stanleymesa.pokedex.utils.loge
 @Composable
 fun PokemonCard(
     modifier: Modifier = Modifier,
+    text: String = ""
 ) {
     loge("render pokemon card")
     Card(
@@ -60,7 +61,7 @@ fun PokemonCard(
             )
             Spacer(modifier = Modifier.height(24.dp))
             Text(
-                text = "Pikachu",
+                text = text,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.align(CenterHorizontally)

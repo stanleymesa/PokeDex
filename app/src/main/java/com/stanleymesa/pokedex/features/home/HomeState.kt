@@ -1,5 +1,7 @@
 package com.stanleymesa.pokedex.features.home
 
 data class HomeState(
-    val searchText: String = "",
+    var searchText: String = "",
+    var test: String = "",
+    var items: Int = 10
 )

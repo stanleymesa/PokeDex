@@ -15,33 +15,40 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.stanleymesa.pokedex.R
 import com.stanleymesa.pokedex.features.home.component.DefaultEditText
 import com.stanleymesa.pokedex.features.home.component.PokemonCard
-import com.stanleymesa.pokedex.ui.theme.PokeDexTheme
-import com.stanleymesa.pokedex.utils.asState
 import com.stanleymesa.pokedex.utils.loge
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun HomeScreen(
-    stateFlow: () -> StateFlow<HomeState>,
-    onEvent: (HomeEvent) -> Unit
+    navController: NavController,
+//    viewModel: HomeViewModel = hiltViewModel()
+//    state: HomeState,
+//    state: () -> HomeState,
+    onEvent: (HomeEvent) -> Unit,
+    stateSearch: State<String>,
+    stateTest: State<String>,
 ) {
+
     loge("render home screen")
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
+        loge("render surface")
         Box(modifier = Modifier.fillMaxWidth()) {
             Column(
                 modifier = Modifier
@@ -49,6 +56,7 @@ fun HomeScreen(
                     .padding(horizontal = 16.dp)
                     .align(Alignment.TopCenter)
             ) {
+                loge("render column")
                 Image(
                     painter = painterResource(id = R.drawable.img_pokemon_logo),
                     contentDescription = stringResource(id = R.string.content),
@@ -64,7 +72,7 @@ fun HomeScreen(
                     onValueChange = {
                         onEvent(HomeEvent.SearchText(it))
                     },
-                    value = stateFlow().asState().searchText,
+                    value = stateSearch.value,
                     hint = stringResource(id = R.string.search_pokemon)
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -79,7 +87,7 @@ fun HomeScreen(
                     items(
                         count = 10,
                     ) {
-                        PokemonCard()
+                        PokemonCard(text = stateTest.value)
                     }
                 }
             }
@@ -87,14 +95,15 @@ fun HomeScreen(
     }
 }
 
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    PokeDexTheme(darkTheme = false, dynamicColor = false) {
-        HomeScreen(
-            stateFlow = { MutableStateFlow(HomeState()) },
-            onEvent = {}
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun HomeScreenPreview() {
+//    PokeDexTheme(darkTheme = false, dynamicColor = false) {
+//        HomeScreen(
+//            navController = rememberNavController(),
+//            stateFlow = { MutableStateFlow(HomeState()) },
+//            onEvent = {}
+//        )
+//    }
+//}
 

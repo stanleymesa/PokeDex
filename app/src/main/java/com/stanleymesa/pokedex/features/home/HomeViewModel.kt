@@ -3,8 +3,6 @@ package com.stanleymesa.pokedex.features.home
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -15,9 +13,6 @@ import com.stanleymesa.pokedex.utils.coroutines.CoroutineContextProvider
 import com.stanleymesa.pokedex.utils.loge
 import com.stanleymesa.pokedex.utils.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,8 +23,17 @@ class HomeViewModel @Inject constructor(
     private val contextProvider: CoroutineContextProvider
 ) : ViewModel() {
 
-    private var _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
-    val state: StateFlow<HomeState> = _state.asStateFlow()
+//    private var _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
+//    val state: StateFlow<HomeState> = _state.asStateFlow()
+
+    var state = mutableStateOf(HomeState())
+        private set
+
+    var stateSearch = mutableStateOf("")
+        private set
+
+    var stateTest = mutableStateOf("")
+        private set
 
     init {
 //        getPokemonInfo("charmander")
@@ -38,7 +42,14 @@ class HomeViewModel @Inject constructor(
     fun onEvent(homeEvent: HomeEvent) {
         when (homeEvent) {
             is HomeEvent.SearchText -> {
-                _state.update { state.value.copy(searchText = homeEvent.text) }
+//                state.value =
+//                    state.value.copy(searchText = homeEvent.text)
+                stateSearch.value = homeEvent.text
+            }
+
+            is HomeEvent.Test -> {
+//                state.value = state.value.copy(test = homeEvent.text)
+                stateTest.value = homeEvent.text
             }
         }
     }
