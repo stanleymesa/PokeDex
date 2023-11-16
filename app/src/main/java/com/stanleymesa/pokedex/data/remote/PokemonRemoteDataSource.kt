@@ -5,7 +5,9 @@ import javax.inject.Inject
 class PokemonRemoteDataSource @Inject constructor(
     private val pokemonRemoteService: PokemonRemoteService
 ) {
+    suspend fun getPokemonList(limit: Int, offset: Int) =
+        pokemonRemoteService.getPokemonList(limit, offset)
 
-    suspend fun getPokemoninfo(name: String) = pokemonRemoteService.getPokemonInfo(name)
+    suspend fun getPokemonInfo(name: String) = pokemonRemoteService.getPokemonInfo(name)
 
 }

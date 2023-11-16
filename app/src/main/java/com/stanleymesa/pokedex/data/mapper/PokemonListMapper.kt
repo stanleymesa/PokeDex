@@ -1,23 +1,39 @@
 package com.stanleymesa.pokedex.data.mapper
 
+import androidx.compose.ui.text.capitalize
 import com.stanleymesa.pokedex.data.model.PokemonListDTO
-import com.stanleymesa.pokedex.data.model.ResultsItem
 import com.stanleymesa.pokedex.domain.model.PokemonList
-import com.stanleymesa.pokedex.domain.model.PokemonListResults
-import com.stanleymesa.pokedex.utils.orZero
+import java.util.Locale
 
 object PokemonListMapper {
 
     fun PokemonListDTO?.toDomainModel() = PokemonList(
-        next = this?.next.orEmpty(),
-        previous = this?.previous.orEmpty(),
-        count = this?.count.orZero(),
-        results = this?.results?.filterNotNull()?.map { it.toDomainModel() }.orEmpty()
-    )
-
-    private fun ResultsItem?.toDomainModel() = PokemonListResults(
-        name = this?.name.orEmpty(),
-        url = this?.url.orEmpty()
+        name = this?.name?.replaceFirstChar { it.uppercase() }.orEmpty(),
+        imageUrl = kotlin.runCatching {
+            val url = this?.url
+            var number = 1
+            if (!url.isNullOrEmpty()) {
+                number = if (url.endsWith("/")) {
+                    url.dropLast(1).takeLastWhile { it.isDigit() }.toInt()
+                } else {
+                    url.takeLastWhile { it.isDigit() }.toInt()
+                }
+            }
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$number.png"
+        }
+            .getOrElse { "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" },
+        number = kotlin.runCatching {
+            val url = this?.url
+            var number = 1
+            if (!url.isNullOrEmpty()) {
+                number = if (url.endsWith("/")) {
+                    url.dropLast(1).takeLastWhile { it.isDigit() }.toInt()
+                } else {
+                    url.takeLastWhile { it.isDigit() }.toInt()
+                }
+            }
+            number
+        }.getOrElse { 1 }
     )
 
 }

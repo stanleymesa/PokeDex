@@ -3,10 +3,12 @@ package com.stanleymesa.pokedex.features
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.Scaffold
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.stanleymesa.pokedex.features.home.HomeScreen
 import com.stanleymesa.pokedex.features.home.HomeViewModel
 import com.stanleymesa.pokedex.ui.theme.PokeDexTheme
@@ -29,12 +31,13 @@ class MainActivity : ComponentActivity() {
                         route = Screen.Home.route
                     ) {
                         val viewModel: HomeViewModel = hiltViewModel()
+                        val pokemonList = viewModel.pagingData.collectAsLazyPagingItems()
+
                         HomeScreen(
                             navController = navController,
-//                            state = { viewModel.state.value }  ,
+                            state = viewModel.state.value,
                             onEvent = viewModel::onEvent,
-                            stateSearch = viewModel.stateSearch,
-                            stateTest = viewModel.stateTest,
+                            pagingItems = pokemonList
                         )
                     }
 //                        composable(

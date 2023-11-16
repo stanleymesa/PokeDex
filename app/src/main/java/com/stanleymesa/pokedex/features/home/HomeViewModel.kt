@@ -7,13 +7,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.palette.graphics.Palette
 import com.stanleymesa.pokedex.domain.usecase.PokemonUseCases
 import com.stanleymesa.pokedex.utils.coroutines.CoroutineContextProvider
 import com.stanleymesa.pokedex.utils.loge
 import com.stanleymesa.pokedex.utils.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,33 +26,26 @@ class HomeViewModel @Inject constructor(
     private val contextProvider: CoroutineContextProvider
 ) : ViewModel() {
 
-//    private var _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
-//    val state: StateFlow<HomeState> = _state.asStateFlow()
-
     var state = mutableStateOf(HomeState())
         private set
 
-    var stateSearch = mutableStateOf("")
-        private set
-
-    var stateTest = mutableStateOf("")
-        private set
-
-    init {
-//        getPokemonInfo("charmander")
-    }
+    val pagingData = pokemonUseCases.getPokemonList().cachedIn(viewModelScope)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), PagingData.empty())
 
     fun onEvent(homeEvent: HomeEvent) {
         when (homeEvent) {
             is HomeEvent.SearchText -> {
-//                state.value =
-//                    state.value.copy(searchText = homeEvent.text)
-                stateSearch.value = homeEvent.text
+                state.value = state.value.copy(searchText = homeEvent.text)
             }
 
             is HomeEvent.Test -> {
-//                state.value = state.value.copy(test = homeEvent.text)
-                stateTest.value = homeEvent.text
+                state.value = state.value.copy(test = homeEvent.text)
+            }
+
+            is HomeEvent.CalcDominantColor -> {
+                calcDominantColor(homeEvent.drawable) {
+                    state.value = state.value.copy(dominantColor = it)
+                }
             }
         }
     }
@@ -71,7 +67,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun calcDominantColor(drawable: Drawable, onFinish: (Color) -> Unit) {
-
         val bitmap = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
 
         Palette.from(bitmap).generate { palette ->

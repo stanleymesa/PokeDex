@@ -15,40 +15,30 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.paging.compose.LazyPagingItems
 import com.stanleymesa.pokedex.R
+import com.stanleymesa.pokedex.domain.model.PokemonList
 import com.stanleymesa.pokedex.features.home.component.DefaultEditText
 import com.stanleymesa.pokedex.features.home.component.PokemonCard
-import com.stanleymesa.pokedex.utils.loge
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-//    viewModel: HomeViewModel = hiltViewModel()
-//    state: HomeState,
-//    state: () -> HomeState,
+    state: HomeState,
     onEvent: (HomeEvent) -> Unit,
-    stateSearch: State<String>,
-    stateTest: State<String>,
+    pagingItems: LazyPagingItems<PokemonList>
 ) {
-
-    loge("render home screen")
-
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        loge("render surface")
         Box(modifier = Modifier.fillMaxWidth()) {
             Column(
                 modifier = Modifier
@@ -56,7 +46,6 @@ fun HomeScreen(
                     .padding(horizontal = 16.dp)
                     .align(Alignment.TopCenter)
             ) {
-                loge("render column")
                 Image(
                     painter = painterResource(id = R.drawable.img_pokemon_logo),
                     contentDescription = stringResource(id = R.string.content),
@@ -72,7 +61,7 @@ fun HomeScreen(
                     onValueChange = {
                         onEvent(HomeEvent.SearchText(it))
                     },
-                    value = stateSearch.value,
+                    value = state.searchText,
                     hint = stringResource(id = R.string.search_pokemon)
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -83,11 +72,15 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(bottom = 24.dp)
                 ) {
-                    loge("render grid")
-                    items(
-                        count = 10,
-                    ) {
-                        PokemonCard(text = stateTest.value)
+                    items(count = pagingItems.itemCount) { index ->
+                        kotlin.runCatching {
+                            val item = pagingItems[index]
+                            item?.let {
+                                PokemonCard(
+                                    pokemonList = it,
+                                )
+                            }
+                        }
                     }
                 }
             }

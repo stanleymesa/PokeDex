@@ -1,7 +1,9 @@
 package com.stanleymesa.pokedex.features.home
 
+import androidx.compose.ui.graphics.Color
+
 data class HomeState(
     var searchText: String = "",
     var test: String = "",
-    var items: Int = 10
+    var dominantColor: Color = Color.LightGray,
 )

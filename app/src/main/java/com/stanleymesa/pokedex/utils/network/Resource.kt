@@ -29,7 +29,7 @@ sealed class ResourcePaging<out T> constructor(
     val status: NetworkState,
     val message: String? = null,
     val data: T? = null,
-    val arrayCount: Int? = null,
+    val count: Int? = null,
     val totalItems: Int? = null,
     val pageSize: Int? = null,
     val next: String? = null,
@@ -38,7 +38,7 @@ sealed class ResourcePaging<out T> constructor(
 
     class Success<T>(
         data: T,
-        arrayCount: Int? = null,
+        count: Int? = null,
         totalItems: Int? = null,
         pageSize: Int? = null,
         next: String? = null,
@@ -46,7 +46,7 @@ sealed class ResourcePaging<out T> constructor(
         message: String? = null
     ) : ResourcePaging<T>(
         data = data,
-        arrayCount = arrayCount,
+        count = count,
         totalItems = totalItems,
         pageSize = pageSize,
         next = next,
