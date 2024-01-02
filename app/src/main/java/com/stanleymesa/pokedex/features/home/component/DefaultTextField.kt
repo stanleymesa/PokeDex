@@ -36,11 +36,13 @@ fun DefaultEditText(
                 shape = RoundedCornerShape(16.dp)
             ),
         shape = RoundedCornerShape(16.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.White,
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.White,
+            unfocusedContainerColor = Color.White,
             unfocusedIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
-            textColor = Color.Black
+            focusedTextColor = Color.Black,
+            unfocusedTextColor = Color.Black
         ),
         textStyle = MaterialTheme.typography.bodyMedium,
         maxLines = 1,

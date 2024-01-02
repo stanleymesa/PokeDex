@@ -41,12 +41,6 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.Test -> {
                 state.value = state.value.copy(test = homeEvent.text)
             }
-
-            is HomeEvent.CalcDominantColor -> {
-                calcDominantColor(homeEvent.drawable) {
-                    state.value = state.value.copy(dominantColor = it)
-                }
-            }
         }
     }
 
@@ -62,16 +56,6 @@ class HomeViewModel @Inject constructor(
                 else -> {
                     loge(resource.message.toString())
                 }
-            }
-        }
-    }
-
-    fun calcDominantColor(drawable: Drawable, onFinish: (Color) -> Unit) {
-        val bitmap = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
-
-        Palette.from(bitmap).generate { palette ->
-            palette?.dominantSwatch?.rgb?.let { colorValue ->
-                onFinish(Color(colorValue))
             }
         }
     }

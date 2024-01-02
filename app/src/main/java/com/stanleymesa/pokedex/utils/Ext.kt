@@ -1,9 +1,7 @@
 package com.stanleymesa.pokedex.utils
 
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.flow.StateFlow
+import com.google.gson.GsonBuilder
 
 fun Int?.orZero(): Int = this ?: 0
 
@@ -13,5 +11,4 @@ fun loge(message: String) {
     Log.e("TAG", message)
 }
 
-@Composable
-fun <T> StateFlow<T>.asState(): T = this.collectAsStateWithLifecycle().value
+fun Any?.toJsonPretty(): String = GsonBuilder().setPrettyPrinting().create().toJson(this)

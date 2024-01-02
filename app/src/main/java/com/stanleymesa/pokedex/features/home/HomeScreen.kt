@@ -23,10 +23,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.itemKey
 import com.stanleymesa.pokedex.R
 import com.stanleymesa.pokedex.domain.model.PokemonList
 import com.stanleymesa.pokedex.features.home.component.DefaultEditText
 import com.stanleymesa.pokedex.features.home.component.PokemonCard
+import com.stanleymesa.pokedex.utils.loge
+import com.stanleymesa.pokedex.utils.toJsonPretty
 
 @Composable
 fun HomeScreen(
@@ -72,9 +75,10 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(bottom = 24.dp)
                 ) {
-                    items(count = pagingItems.itemCount) { index ->
+                    items(count = pagingItems.itemCount,) { index ->
                         kotlin.runCatching {
                             val item = pagingItems[index]
+                            loge("item = ${item.toJsonPretty()}")
                             item?.let {
                                 PokemonCard(
                                     pokemonList = it,

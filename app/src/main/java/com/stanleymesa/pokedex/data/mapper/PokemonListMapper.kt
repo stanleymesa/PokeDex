@@ -1,9 +1,7 @@
 package com.stanleymesa.pokedex.data.mapper
 
-import androidx.compose.ui.text.capitalize
 import com.stanleymesa.pokedex.data.model.PokemonListDTO
 import com.stanleymesa.pokedex.domain.model.PokemonList
-import java.util.Locale
 
 object PokemonListMapper {
 
